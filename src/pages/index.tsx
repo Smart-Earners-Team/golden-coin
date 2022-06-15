@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Navbar from "../components/layouts/Navbar";
 import Section from "../components/layouts/Section";
 import SEO from "../components/SEO";
-import CopyToClipboard from "../components/Tools/CopyToClipboard";
+import CopyToClipboard from "../components/Tools/copyToClipboard";
 import CountDownTimer from "../components/Tools/CountDownTimer";
 
 const IndexPage = () => {
