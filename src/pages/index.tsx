@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Navbar from "../components/layouts/Navbar";
 import Section from "../components/layouts/Section";
 import SEO from "../components/SEO";
-import CopyToClipboard from "../components/Tools/copyToClipboard";
+import CopyToClipboard from "../components/Tools/CopyToClipboard";
 import CountDownTimer from "../components/Tools/CountDownTimer";
 
 const IndexPage = () => {
@@ -58,7 +58,9 @@ const IndexPage = () => {
           <h3 className="text-3xl text-white">Join Presale and Claim free Airdrops.</h3>
           <div className="space-y-5">
             <p className="text-[#FF61B6]">Presale Ends Feb 10th, 2022.</p>
-            <p>100,000 GCOIN available only BUY and CLAIM 2% airdrop, refer and earn 2% referral bonus all in GCOIN.</p>
+            <p>
+              100,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
+            </p>
             <div className="bg-[#191039] p-5">
               <CountDownTimer timestamp={10000000} handleDisableButton={() => {}} />
             </div>
@@ -76,11 +78,6 @@ const IndexPage = () => {
           <ul className="list-disc list-inside pl-2">
             <li>Pancakeswap listing 1 GCOIN = 0.6USD</li>
             <li>Presale 1 GCOIN = 0.5 BUSD</li>
-            <li>0.01 BUSD = 90,000 GCOIN</li>
-            <li>0.1 BUSD = 900,000 GCOIN</li>
-            <li>0.5 BUSD = 4,500,000 GCOIN</li>
-            <li>1 BUSD = 9,000,000 GCOIN</li>
-            <li>10 BUSD = 90, 000,000 GCOIN</li>
           </ul>
         </Section>
         <Section padding containerClass="w-full">
