@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Navbar from "../components/layouts/Navbar";
 import Section from "../components/layouts/Section";
 import SEO from "../components/SEO";
+import CopyToClipboard from "../components/Tools/copyToClipboard";
 
 const IndexPage = () => {
   return (
@@ -63,7 +64,9 @@ const IndexPage = () => {
         <Section padding className="space-y-5">
           <h2>The Referral Programe</h2>
           <p>Share your referral link or get commission for referred token purchases instantly to your wallet.</p>
-          <div className="bg-white p-5"></div>
+          <div className="bg-[#191039] p-5">
+            <CopyToClipboard content="https://www.goldencoinweb.com/?ref=0xe99a98A77439B049b0B721D4D225bcE77BF79d84" />
+          </div>
         </Section>
         <Section padding>
           <h2>Beyond The Moon</h2>
