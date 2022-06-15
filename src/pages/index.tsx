@@ -1,11 +1,100 @@
-import React, { Fragment } from "react";
+import BigNumber from "bignumber.js";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import Button from "../components/Buttons/Button";
+import ConnectWalletButton from "../components/Buttons/ConnectWalletButton";
+import Footer from "../components/layouts/Footer";
 import Navbar from "../components/layouts/Navbar";
 import Section from "../components/layouts/Section";
 import SEO from "../components/SEO";
 import CopyToClipboard from "../components/Tools/copyToClipboard";
 import CountDownTimer from "../components/Tools/CountDownTimer";
+import useActiveWeb3React from "../hooks/useActiveWeb3React";
+import { useAppContext } from "../hooks/useAppContext";
+import useToast from "../hooks/useToast";
+import { buyGoldCoin, claimAirdrop } from "../utils/calls";
+import { getGoldCoinContract } from "../utils/contractHelpers";
+import cls from "classnames";
 
 const IndexPage = () => {
+  const [fetching, setFetching] = useState(false);
+  const [airdropClaimed, setAirdropClaimed] = useState(false);
+  const {
+    refAddress,
+    triggerFetchTokens,
+    wallet: { balance },
+  } = useAppContext();
+  const { active, account, library } = useActiveWeb3React();
+  const { toastSuccess, toastError } = useToast();
+  const [errorMsg, setErrorMsg] = useState("");
+  const [amountToPay, setAmountToPay] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      if (account) {
+        const contract = getGoldCoinContract();
+        try {
+          const result = await contract.hasClaimedAirdrop(account);
+          setAirdropClaimed(result);
+        } catch (err) {
+          // console.error(err);
+          setAirdropClaimed(false);
+        }
+      } else {
+        setAirdropClaimed(false);
+      }
+    })();
+  }, [account]);
+
+  const handleClaimAirdrop = useCallback(async () => {
+    if (library) {
+      setFetching(true);
+      try {
+        await claimAirdrop(library.getSigner());
+        toastSuccess("You have claimed your GCOIN.");
+        triggerFetchTokens();
+      } catch (err) {
+        console.error(err);
+        toastError("Error", "Something went wrong while trying to perform the transaction.");
+      } finally {
+        setFetching(false);
+      }
+    }
+  }, [library]);
+
+  const handleBuyGoldCoin = useCallback(async () => {
+    if (library) {
+      setFetching(true);
+      try {
+        await buyGoldCoin(amountToPay, refAddress, library.getSigner());
+        toastSuccess("You have claimed your GCOIN.");
+        triggerFetchTokens();
+      } catch (err) {
+        console.error(err);
+        toastError("Error", "Something went wrong while trying to perform the transaction.");
+      } finally {
+        setFetching(false);
+      }
+    }
+  }, [library, refAddress]);
+
+  const handleInputChange: React.FormEventHandler<HTMLInputElement> = useCallback(
+    async (e) => {
+      const val = e.currentTarget.value.replace(/,/g, ".");
+      const pattern = /^[0-9]*[.,]?[0-9]{0,18}$/g;
+      if (!pattern.test(val)) return;
+
+      const amount = new BigNumber(val);
+      const bal = new BigNumber(balance);
+      if (amount.isGreaterThan(bal)) {
+        setErrorMsg("Insufficient funds in your wallet");
+      } else {
+        setErrorMsg("");
+      }
+      setAmountToPay(val);
+    },
+    [balance],
+  );
+
   return (
     <div className="flex flex-col">
       <Section className="w-full">
@@ -19,7 +108,7 @@ const IndexPage = () => {
         />
         <Section padding className="space-y-8">
           <h1 className="max-w-xl">Golden Coin, The New generation platform.</h1>
-          <p>
+          <p className="max-w-2xl">
             Golden Coin is the most unique project at the worldwide market of NFT investment with the first crypto
             ecosystem or a community with digital currency for everyday people and for every transaction globally on
             Blockchain promoting goodness, promoting love, unity, oneness, peace and equitable distribution of wealth.
@@ -28,12 +117,17 @@ const IndexPage = () => {
             Transactions that includes possibilities to combine investments and tokens.
           </p>
         </Section>
-        <Section padding containerClass="px-4" className="bg-[#191039]/90 px-5">
+        <Section
+          padding
+          containerClass="px-4"
+          className="bg-[#191039]/90 flex flex-col md:flex-row
+          md:justify-between"
+        >
           <div>
             <h2 className="uppercase text-white">Tokenomics</h2>
-            <ol className="list-decimal list-inside pl-3 space-y-1">
+            <ol className="list-decimal list-inside pl-3 space-y-1 text-base">
               <li>Total supply = 500,000</li>
-              <li>Private Sale = 20%</li>
+              <li>Private Sale = 25%</li>
               <li>Pre-sale = 20%</li>
               <li>Liquidity = 30% (to be locked for years)</li>
               <li>Marketing and partnerships/advisory = 10%</li>
@@ -47,7 +141,7 @@ const IndexPage = () => {
           </div>
           <div>
             <h2 className="uppercase text-white">Benefits</h2>
-            <ol className="list-decimal list-inside pl-3 space-y-1">
+            <ol className="list-decimal list-inside pl-3 space-y-1 text-base">
               <li>Referral Count is Unlimited</li>
               <li>10% BUSD Per Referral</li>
             </ol>
@@ -61,8 +155,32 @@ const IndexPage = () => {
             <p>
               100,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
             </p>
-            <div className="bg-[#191039] p-5">
+            <div className="bg-[#191039] p-5 max-w-sm space-y-3 mx-auto">
               <CountDownTimer timestamp={10000000} handleDisableButton={() => {}} />
+              {active && !airdropClaimed && (
+                <Fragment>
+                  <Button onClick={handleClaimAirdrop} loading={fetching} disabled={fetching}>
+                    Claim Airdrop
+                  </Button>
+                  <p className="text-sm">Cost 0.01 BNB to get 9000 GCOIN</p>
+                </Fragment>
+              )}
+              {active && airdropClaimed && (
+                <TextInput
+                  errorMsg={errorMsg}
+                  onChangeHandler={handleInputChange}
+                  value={amountToPay}
+                  onSubmit={handleBuyGoldCoin}
+                  trx={fetching}
+                  isDisabled={fetching || errorMsg.length > 0 || Number.isNaN(Number.parseFloat(amountToPay))}
+                />
+              )}
+              {!active && (
+                <Fragment>
+                  <ConnectWalletButton />
+                  <p className="text-sm">Connect your wallet.</p>
+                </Fragment>
+              )}
             </div>
           </div>
         </Section>
@@ -70,7 +188,10 @@ const IndexPage = () => {
           <h2>The Referral Programe</h2>
           <p>Share your referral link or get commission for referred token purchases instantly to your wallet.</p>
           <div className="bg-[#191039] p-5">
-            <CopyToClipboard content="https://www.goldencoinweb.com/?ref=0xe99a98A77439B049b0B721D4D225bcE77BF79d84" />
+            <CopyToClipboard
+              canCopy={active && account != null}
+              content={`https://www.goldencoinweb.com/?ref=${account}`}
+            />
           </div>
         </Section>
         <Section padding>
@@ -85,6 +206,65 @@ const IndexPage = () => {
           <p className="break-words">0x9fe8228563EC4135C8c553f7419C0C1954f990C8</p>
         </Section>
       </main>
+      <Footer />
+    </div>
+  );
+};
+
+interface TextInputProps {
+  errorMsg: string;
+  onChangeHandler: (e: React.FormEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
+  value: string;
+  isDisabled: boolean;
+  trx: boolean; // transaction
+}
+
+const TextInput = ({ onChangeHandler, onSubmit, errorMsg, value, isDisabled, trx }: TextInputProps) => {
+  const hasError = errorMsg.length > 0;
+  const {
+    wallet: { balance },
+  } = useAppContext();
+  return (
+    <div className="w-full space-y-2 mx-auto">
+      <div className="p-3 rounded-lg transition-transform duration-200 ease-linear">
+        <div>
+          <div className="mb-2 text-xs font-light text-left">Amount</div>
+          <div className="relative flex items-center justify-between space-x-1">
+            <div className=" w-full">
+              <input
+                type="text"
+                className={cls(
+                  "placeholder-gray-400 outline-none border-b border-[#7B8BA5] font-medium",
+                  "transition-all duration-200 text-gray-300 p-1 disabled:opacity-70 text-xl",
+                  "disabled:cursor-not-allowed block bg-transparent w-full leading-none",
+                  "bg-primary/20",
+                  {
+                    "text-red-400": hasError,
+                  },
+                )}
+                placeholder="0"
+                value={value}
+                onChange={onChangeHandler}
+              />
+              <div
+                className={cls("flex justify-between text-opacity-80 py-0.5 px-1 text-xs", {
+                  "text-red-400 font-normal": hasError,
+                })}
+              >
+                <span>Balance</span>
+                <span>{hasError ? errorMsg : balance}</span>
+              </div>
+            </div>
+            <div className="flex items-center text-sm">
+              <span>BNB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Button onClick={onSubmit} className="block mx-auto w-full" disabled={isDisabled} loading={trx}>
+        Buy Gold Coin
+      </Button>
     </div>
   );
 };

@@ -32,13 +32,13 @@ export default function CopyToClipboard({ content, canCopy = true }: CopyToClipb
         ref={codeElement}
         onClick={canCopy ? copyAddress : () => {}}
       >
-        {content}
+        {!canCopy ? "Please connect to your wallet" : content}
       </pre>
       {canCopy && (
         <button
           onClick={copyAddress}
           className="text-base font-medium underline bg-white p-2 rounded-sm
-            block text-black border border-black"
+            block text-black border border-black my-2"
         >
           {copied ? "Copied!" : "Click to copy"}
         </button>
