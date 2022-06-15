@@ -3,6 +3,7 @@ import Navbar from "../components/layouts/Navbar";
 import Section from "../components/layouts/Section";
 import SEO from "../components/SEO";
 import CopyToClipboard from "../components/Tools/copyToClipboard";
+import CountDownTimer from "../components/Tools/CountDownTimer";
 
 const IndexPage = () => {
   return (
@@ -58,7 +59,9 @@ const IndexPage = () => {
           <div className="space-y-5">
             <p className="text-[#FF61B6]">Presale Ends Feb 10th, 2022.</p>
             <p>100,000 GCOIN available only BUY and CLAIM 2% airdrop, refer and earn 2% referral bonus all in GCOIN.</p>
-            <div className="bg-white p-20"></div>
+            <div className="bg-[#191039] p-5">
+              <CountDownTimer timestamp={10000000} handleDisableButton={() => {}} />
+            </div>
           </div>
         </Section>
         <Section padding className="space-y-5">
