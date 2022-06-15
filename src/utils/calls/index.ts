@@ -6,7 +6,7 @@ import { BIG_TEN } from "../bigNumber";
 export const claimAirdrop = async (signer: CallSignerType) => {
   const contract = getGoldCoinContract(signer);
   const value = new BigNumber("0.001").times(BIG_TEN.pow(18)).toJSON();
-  const tx = await contract.claimAirdrop(value);
+  const tx = await contract.claimAirdrop({ value });
   const receipt = await tx.wait();
   return receipt.status;
 };

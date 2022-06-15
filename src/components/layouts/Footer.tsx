@@ -1,23 +1,40 @@
 import React from "react";
 import ttebLogo from "../../images/tteb-logo.png";
+import SiteLogo from "../SiteLogo";
 import Section from "./Section";
 
-interface FooterProps extends React.ComponentProps<"footer"> {}
+type SocialIconTypes = "twitter" | "facebook" | "telegram" | "whatsapp";
 
+const socials: { name: SocialIconTypes; url: string }[] = [
+  { name: "telegram", url: "https://t.me/KryptoliteNews" },
+  { name: "whatsapp", url: "https://t.me/KryptoliteNews" },
+  { name: "facebook", url: "https://fb.me/KryptoliteCommunity" },
+  { name: "twitter", url: "https://twitter.com/KryptoliteSwap" },
+];
+
+interface FooterProps extends React.ComponentProps<"footer"> {}
 export default function Footer(_props: FooterProps) {
   return (
-    <Section containerClass="my-10 px-2" className="bg-white rounded-full border-gray-300 border shadow-md">
-      <footer
-        className="text-center px-2 py-3 flex flex-col space-y-2 sm:flex-row sm:space-y-0 justify-between
-          items-center font-medium text-base "
-      >
-        <div className="inline-flex items-center">
-          <span>Audited by</span>
-          <a href="https://tteb.finance/" className="inline-block mx-2">
-            <img src={ttebLogo} alt="TTEB Logo" width={70} height={40} />
-          </a>
+    <Section containerClass="py-10 px-2 bg-primary">
+      <footer className="text-center px-2 py-3 flex flex-col space-y-2 items-center text-base ">
+        <SiteLogo text="GCOIN" />
+        <div>
+          <p className="uppercase">We are on</p>
+          <div className="flex items-start justify-center space-x-4 flex-wrap">
+            {socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline inline-block hover:no-underline"
+              >
+                {social.name}
+              </a>
+            ))}
+          </div>
         </div>
-        <div>&copy; Avaxtrees.Finance - {new Date().getFullYear()}</div>
+        <div className="text-xs">&copy;{new Date().getFullYear()} goldencoinweb.com</div>
       </footer>
     </Section>
   );
