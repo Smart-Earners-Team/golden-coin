@@ -265,7 +265,7 @@ const TextInput = ({ onChangeHandler, onSubmit, errorMsg, value, isDisabled, trx
                   "text-red-400 font-normal": hasError,
                 })}
               >
-                <span>BNB Bal.</span>
+                <span>BUSD Bal.</span>
                 <span>{hasError ? errorMsg : balance}</span>
               </div>
             </div>

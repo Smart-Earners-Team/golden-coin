@@ -16,6 +16,10 @@ export const addresses = {
     56: "0xf4d8F31956f98664874fEc410Ae615CcdE394fbC",
     97: "",
   },
+  busd: {
+    56: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    97: "",
+  },
 };
 
 export const networkList = {

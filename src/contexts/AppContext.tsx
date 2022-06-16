@@ -1,24 +1,19 @@
 import BigNumber from "bignumber.js";
 import { isAddress } from "ethers/lib/utils";
-import React, {
-  useEffect,
-  useState,
-  createContext,
-  useCallback,
-  useContext,
-} from "react";
-import { networkList } from "../config";
+import React, { useEffect, useState, createContext, useCallback, useContext } from "react";
+import { addresses, networkList } from "../config";
 import useQuery from "../hooks";
 import useActiveWeb3React from "../hooks/useActiveWeb3React";
 import { useEagerConnect } from "../hooks/useEagerConnect";
 import { useInactiveListener } from "../hooks/useInactiveListener";
 import useToast from "../hooks/useToast";
 import { BIG_TEN } from "../utils/bigNumber";
-import {
-  connectorsByName,
-  resetWalletConnectConnector,
-} from "../utils/web3React";
+import { getContract } from "../utils/contractHelpers";
+import { connectorsByName, resetWalletConnectConnector } from "../utils/web3React";
 import { RefreshContext } from "./RefreshContext";
+import erc20Abi from "../config/abi/erc20.json";
+import { getAddress } from "../utils/addressHelpers";
+import { ethers } from "ethers";
 
 export interface GlobalAppContext {
   wallet: {
@@ -44,17 +39,11 @@ const defaultValues: GlobalAppContext = {
   refAddress: "",
 };
 
-export const GlobalAppContextProvider =
-  createContext<GlobalAppContext>(defaultValues);
+export const GlobalAppContextProvider = createContext<GlobalAppContext>(defaultValues);
 
-export default function AppContext({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AppContext({ children }: { children: React.ReactNode }) {
   const [isConnecting, setIsConnecting] = useState(false);
-  const { deactivate, active, error, account, library, setError } =
-    useActiveWeb3React();
+  const { deactivate, active, error, account, library, setError } = useActiveWeb3React();
   const { fast } = useContext(RefreshContext);
   const { toastError } = useToast();
   // get wallet balance in bnb
@@ -75,15 +64,15 @@ export default function AppContext({
           if (network.chainId !== usingChain) {
             console.error(
               `You have connected to the wrong network.
-                Please switch to the ${networkList[usingChain].name} network`
+                Please switch to the ${networkList[usingChain].name} network`,
             );
             setError(
               new Error(`You have connected to the wrong network.
-              Please switch to the ${networkList[usingChain].name} network`)
+              Please switch to the ${networkList[usingChain].name} network`),
             );
             toastError(
               `You have connected to the wrong network.
-                Please switch to the ${networkList[usingChain].name} network`
+                Please switch to the ${networkList[usingChain].name} network`,
             );
           }
         });
@@ -120,16 +109,16 @@ export default function AppContext({
   useEffect(() => {
     (async () => {
       if (account && library) {
-        library
-          .getSigner()
-          .getBalance()
-          .then(({ _hex }) => {
-            const bal = new BigNumber(_hex).div(BIG_TEN.pow(18)).toJSON();
+        const contract = getContract(erc20Abi, getAddress(addresses.busd));
+        contract
+          .balanceOf(account)
+          .then((p: ethers.BigNumber) => {
+            const bal = new BigNumber(p._hex).div(BIG_TEN.pow(18)).toJSON();
             setBalance(bal);
           })
           .catch(() => {
             // console.error(e, "Error getting balance");
-            // setBalance("0");
+            setBalance("0");
           });
       } else {
         setBalance("0");

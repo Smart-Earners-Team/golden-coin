@@ -42,7 +42,7 @@ export default function Navbar() {
           </button>
         </div>
         <nav
-          className={`${open ? "block" : "hidden"} lg:block border border-gray-500 p-2 lg:p-0
+          className={`${open ? "block" : "hidden"} lg:block border border-gray-500 p-2 lg:p-0 z-50 lg:z-auto
            bg-black lg:bg-transparent lg:border-none absolute lg:relative top-20 lg:top-0 lg:left-0 left-2
           right-2`}
         >
