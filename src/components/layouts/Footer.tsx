@@ -14,12 +14,12 @@ const socials: { name: SocialIconTypes; url: string }[] = [
 interface FooterProps extends React.ComponentProps<"footer"> {}
 export default function Footer(_props: FooterProps) {
   return (
-    <Section containerClass="py-10 px-2 bg-primary">
-      <footer className="text-center px-2 py-3 flex flex-col space-y-2 items-center text-base ">
+    <Section containerClass="py-10 px-2 bg-[#23174e]">
+      <footer className="lg:text-center px-2 py-3 flex flex-col space-y-4 lg:items-center text-base ">
         <SiteLogo text="GCOIN" />
         <div>
-          <p className="uppercase">We are on</p>
-          <div className="flex items-start justify-center space-x-4 flex-wrap">
+          <p className="uppercase mb-3">We are on</p>
+          <div className="flex lg:justify-center gap-2 flex-wrap">
             {socials.map((social) => (
               <a
                 key={social.name}

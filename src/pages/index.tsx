@@ -14,6 +14,7 @@ import useToast from "../hooks/useToast";
 import { buyGoldCoin, claimAirdrop } from "../utils/calls";
 import { getGoldCoinContract } from "../utils/contractHelpers";
 import cls from "classnames";
+import { StaticImage } from "gatsby-plugin-image";
 
 const IndexPage = () => {
   const [fetching, setFetching] = useState(false);
@@ -106,9 +107,15 @@ const IndexPage = () => {
           description="Is a decentralized peer to peer  digital currency just like Bitcoin. It's a new medium of exchange for goods and services. You can use Gcoin to pay for products and services within and outside G-CONNECT ecosystem."
           slug="/"
         />
-        <Section padding className="space-y-8">
-          <h1 className="max-w-xl">Golden Coin, The New generation platform.</h1>
-          <p className="max-w-2xl">
+        <Section padding className="space-y-8 relative">
+          <StaticImage
+            alt=""
+            src="../images/bg-gcoin-logo.png"
+            placeholder="blurred"
+            className="absolute top-40 md:top-1/2 -translate-y-1/2 right-0 w-56 md:w-1/3 max-w-md opacity-40"
+          />
+          <h1 className="max-w-xl relative">Golden Coin, The New generation platform.</h1>
+          <p className="max-w-2xl relative">
             Golden Coin is the most unique project at the worldwide market of NFT investment with the first crypto
             ecosystem or a community with digital currency for everyday people and for every transaction globally on
             Blockchain promoting goodness, promoting love, unity, oneness, peace and equitable distribution of wealth.
@@ -147,16 +154,22 @@ const IndexPage = () => {
             </ol>
           </div>
         </Section>
-        <Section padding className="text-center space-y-5">
-          <h2 className="text-5xl">Pre-sale &amp; Airdrop</h2>
-          <h3 className="text-3xl text-white">Join Presale and Claim free Airdrops.</h3>
-          <div className="space-y-5">
-            <p className="text-[#FF61B6]">Presale Ends Feb 10th, 2022.</p>
+        <Section padding className="text-center space-y-5 relative">
+          <StaticImage
+            alt=""
+            src="../images/bg-gcoin-logo.png"
+            placeholder="blurred"
+            className="absolute top-40 left-0 w-56 opacity-40"
+          />
+          <h2 className="text-5xl relative">Pre-sale &amp; Airdrop</h2>
+          <h3 className="text-3xl text-white relative">Join Presale and Claim free Airdrops.</h3>
+          <div className="space-y-5 relative">
+            <p className="text-[#FF61B6] font-bold">Presale Ends Feb 10th, 2022.</p>
             <p>
               100,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
             </p>
             <div className="bg-[#191039] p-5 max-w-sm space-y-3 mx-auto">
-              <CountDownTimer timestamp={10000000} handleDisableButton={() => {}} />
+              <CountDownTimer timestamp={1656629940} handleDisableButton={() => {}} />
               {active && !airdropClaimed && (
                 <Fragment>
                   <Button onClick={handleClaimAirdrop} loading={fetching} disabled={fetching}>
@@ -184,26 +197,36 @@ const IndexPage = () => {
             </div>
           </div>
         </Section>
-        <Section padding className="space-y-5">
-          <h2>The Referral Programe</h2>
-          <p>Share your referral link or get commission for referred token purchases instantly to your wallet.</p>
-          <div className="bg-[#191039] p-5">
+        <Section padding className="space-y-5 relative">
+          <StaticImage
+            alt=""
+            src="../images/bg-gcoin-logo.png"
+            placeholder="blurred"
+            className="absolute top-0 right-0 w-56 opacity-40"
+          />
+          <h2 className="relative">The Referral Programe</h2>
+          <p className="relative">
+            Share your referral link or get commission for referred token purchases instantly to your wallet.
+          </p>
+          <div className="bg-[#191039] p-5 relative">
             <CopyToClipboard
               canCopy={active && account != null}
               content={`https://www.goldencoinweb.com/?ref=${account}`}
             />
           </div>
         </Section>
-        <Section padding>
-          <h2>Beyond The Moon</h2>
-          <ul className="list-disc list-inside pl-2">
-            <li>Pancakeswap listing 1 GCOIN = 0.6USD</li>
-            <li>Presale 1 GCOIN = 0.5 BUSD</li>
-          </ul>
-        </Section>
-        <Section padding containerClass="w-full">
-          <h2>Contract Address</h2>
-          <p className="break-words">0x9fe8228563EC4135C8c553f7419C0C1954f990C8</p>
+        <Section padding className="flex flex-col md:flex-row md:justify-between">
+          <div>
+            <h2>Contract Address</h2>
+            <p className="break-words">0x9fe8228563EC4135C8c553f7419C0C1954f990C8</p>
+          </div>
+          <div>
+            <h2>Beyond The Moon</h2>
+            <ul className="list-disc list-inside pl-2">
+              <li>Pancakeswap listing 1 GCOIN = 0.6USD</li>
+              <li>Presale 1 GCOIN = 0.5 BUSD</li>
+            </ul>
+          </div>
         </Section>
       </main>
       <Footer />
