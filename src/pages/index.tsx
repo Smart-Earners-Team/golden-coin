@@ -108,12 +108,9 @@ const IndexPage = () => {
           slug="/"
         />
         <Section padding className="space-y-8 relative">
-          <StaticImage
-            alt=""
-            src="../images/bg-gcoin-logo.png"
-            placeholder="blurred"
-            className="absolute top-40 md:top-1/2 -translate-y-1/2 right-0 w-56 md:w-1/3 max-w-md opacity-40"
-          />
+          <div className="absolute top-40 md:top-1/2 -translate-y-1/2 right-0 w-56 md:w-1/3 max-w-md opacity-40">
+            <StaticImage alt="" src="../images/bg-gcoin-logo.png" placeholder="blurred" />
+          </div>
           <h1 className="max-w-xl relative">Golden Coin, The New generation platform.</h1>
           <p className="max-w-2xl relative">
             Golden Coin is the most unique project at the worldwide market of NFT investment with the first crypto
@@ -154,12 +151,9 @@ const IndexPage = () => {
           </div>
         </Section>
         <Section padding className="text-center space-y-5 relative">
-          <StaticImage
-            alt=""
-            src="../images/bg-gcoin-logo.png"
-            placeholder="blurred"
-            className="absolute top-40 left-0 w-56 opacity-40"
-          />
+          <div className="absolute top-40 left-0 w-56 opacity-40">
+            <StaticImage alt="" src="../images/bg-gcoin-logo.png" placeholder="blurred" />
+          </div>
           <h2 className="text-5xl relative">Pre-sale &amp; Airdrop</h2>
           <h3 className="text-3xl text-white relative">Join Presale and Claim free Airdrops.</h3>
           <div className="space-y-5 relative flex flex-col items-center">
@@ -197,12 +191,9 @@ const IndexPage = () => {
           </div>
         </Section>
         <Section padding className="space-y-5 relative text-center">
-          <StaticImage
-            alt=""
-            src="../images/bg-gcoin-logo.png"
-            placeholder="blurred"
-            className="absolute top-0 right-0 w-56 opacity-40"
-          />
+          <div className="absolute top-0 right-0 w-56 opacity-40">
+            <StaticImage alt="" src="../images/bg-gcoin-logo.png" placeholder="blurred" />
+          </div>
           <h2 className="relative">The Referral Programe</h2>
           <p className="relative">
             Share your referral link or get commission for referred token purchases instantly to your wallet.
