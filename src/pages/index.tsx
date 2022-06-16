@@ -127,8 +127,7 @@ const IndexPage = () => {
         <Section
           padding
           containerClass="px-4"
-          className="bg-[#191039]/90 flex flex-col md:flex-row
-          md:justify-between"
+          className="bg-[#191039]/90 flex flex-col md:flex-row rounded md:justify-between max-w-xl"
         >
           <div>
             <h2 className="uppercase text-white">Tokenomics</h2>
@@ -163,12 +162,12 @@ const IndexPage = () => {
           />
           <h2 className="text-5xl relative">Pre-sale &amp; Airdrop</h2>
           <h3 className="text-3xl text-white relative">Join Presale and Claim free Airdrops.</h3>
-          <div className="space-y-5 relative">
+          <div className="space-y-5 relative flex flex-col items-center">
             <p className="text-[#FF61B6] font-bold">Presale Ends Feb 10th, 2022.</p>
-            <p>
+            <p className="max-w-lg">
               100,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
             </p>
-            <div className="bg-[#191039] p-5 max-w-sm space-y-3 mx-auto">
+            <div className="bg-[#191039] p-5 max-w-sm space-y-3 mx-auto rounded">
               <CountDownTimer timestamp={1656629940} handleDisableButton={() => {}} />
               {active && !airdropClaimed && (
                 <Fragment>
@@ -197,7 +196,7 @@ const IndexPage = () => {
             </div>
           </div>
         </Section>
-        <Section padding className="space-y-5 relative">
+        <Section padding className="space-y-5 relative text-center">
           <StaticImage
             alt=""
             src="../images/bg-gcoin-logo.png"
@@ -208,7 +207,7 @@ const IndexPage = () => {
           <p className="relative">
             Share your referral link or get commission for referred token purchases instantly to your wallet.
           </p>
-          <div className="bg-[#191039] p-5 relative">
+          <div className="bg-[#191039] p-5 relative rounded">
             <CopyToClipboard
               canCopy={active && account != null}
               content={`https://www.goldencoinweb.com/?ref=${account}`}
@@ -259,9 +258,9 @@ const TextInput = ({ onChangeHandler, onSubmit, errorMsg, value, isDisabled, trx
                 type="text"
                 className={cls(
                   "placeholder-gray-400 outline-none border-b border-[#7B8BA5] font-medium",
-                  "transition-all duration-200 text-gray-300 p-1 disabled:opacity-70 text-xl",
+                  "transition-all duration-200 text-gray-300 p-2 disabled:opacity-70 text-xl",
                   "disabled:cursor-not-allowed block bg-transparent w-full leading-none",
-                  "bg-primary/20",
+                  "bg-primary/20 rounded",
                   {
                     "text-red-400": hasError,
                   },
@@ -275,12 +274,9 @@ const TextInput = ({ onChangeHandler, onSubmit, errorMsg, value, isDisabled, trx
                   "text-red-400 font-normal": hasError,
                 })}
               >
-                <span>Balance</span>
+                <span>BNB Bal.</span>
                 <span>{hasError ? errorMsg : balance}</span>
               </div>
-            </div>
-            <div className="flex items-center text-sm">
-              <span>BNB</span>
             </div>
           </div>
         </div>
