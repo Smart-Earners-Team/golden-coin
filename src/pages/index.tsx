@@ -69,7 +69,7 @@ const IndexPage = () => {
         toastSuccess("You have claimed your GCOIN.");
         triggerFetchTokens();
       } catch (err) {
-        // console.error(err);
+        console.error(err);
         toastError("Error", "Something went wrong while trying to perform the transaction.");
       } finally {
         setFetching(false);

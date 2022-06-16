@@ -1,15 +1,14 @@
 import React from "react";
-import ttebLogo from "../../images/tteb-logo.png";
 import SiteLogo from "../SiteLogo";
 import Section from "./Section";
 
 type SocialIconTypes = "twitter" | "facebook" | "telegram" | "whatsapp";
 
 const socials: { name: SocialIconTypes; url: string }[] = [
-  { name: "telegram", url: "https://t.me/KryptoliteNews" },
-  { name: "whatsapp", url: "https://t.me/KryptoliteNews" },
-  { name: "facebook", url: "https://fb.me/KryptoliteCommunity" },
-  { name: "twitter", url: "https://twitter.com/KryptoliteSwap" },
+  { name: "telegram", url: "https://t.me/+WPjFWZHtYOdiMzE8" },
+  { name: "whatsapp", url: "https://chat.whatsapp.com/G5tAPAeQ0AzGRHqATfrrXe" },
+  { name: "facebook", url: "https://www.facebook.com/G-Connect-107421151609293/" },
+  { name: "twitter", url: "https://twitter.com/GCOIN2022?t=RFp6JSflcF_XnLZu-uNZpQ&s=09" },
 ];
 
 interface FooterProps extends React.ComponentProps<"footer"> {}
