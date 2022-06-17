@@ -109,18 +109,26 @@ const IndexPage = ({ location }: PageProps) => {
           description="Is a decentralized peer to peer  digital currency just like Bitcoin. It's a new medium of exchange for goods and services. You can use Gcoin to pay for products and services within and outside G-CONNECT ecosystem."
           slug="/"
         />
-        <Section padding className="space-y-8 relative">
+        <Section padding className="space-y-8 relative md:text-center">
           <div className="absolute top-40 md:top-1/2 -translate-y-1/2 right-0 w-56 md:w-1/3 max-w-md opacity-40">
             <StaticImage alt="" src="../images/bg-gcoin-logo.png" placeholder="blurred" />
           </div>
-          <h1 className="max-w-xl relative">Golden Coin, The New generation platform.</h1>
-          <p className="max-w-2xl relative">
-            Golden Coin is the most unique project at the worldwide market of NFT investment with the first crypto
-            ecosystem or a community with digital currency for everyday people and for every transaction globally on
-            Blockchain promoting goodness, promoting love, unity, oneness, peace and equitable distribution of wealth.
-            Our native currency is called Golden Coin (GCOIN) and will be used to transact within the ecosystem, across
-            the community globally. Golden Coin (GCOIN) is an ideal Crypto Currency For African and Global Everyday
-            Transactions that includes possibilities to combine investments and tokens.
+          <h1 className="relative">Golden Coin, The New generation platform.</h1>
+          <p className="relative">
+            GCOIN is a Decentralized peer to peer digital currency just like Bitcoin it's a new medium of exchange for
+            goods and services. you can use GCOIN to pay for products and services within and outside Golden Connect
+            (G-CONNECT) ecosystem. GCOIN is also a digital asset that increases and decreases in price over time just
+            like bitcoin. this creates a golden opportunity for investors to make good profits by buying low and selling
+            high.
+          </p>
+          <p className="relative">
+            GCOIN can be exchanged to bitcoin, binance coin(BNB smart chain, BUSD), Ethereum, US dollers, and and other
+            currencies all over the world.
+          </p>
+          <p className="relative">
+            GCOIN investors are in charge of their investment. which means you can buy and sale anytime you want. Even
+            the founders of GCOIN don't have control over GCOIN. It is a democratic digital currency. GCOIN is money of
+            the people, by the people and for the people
           </p>
         </Section>
         <Section
@@ -197,13 +205,13 @@ const IndexPage = ({ location }: PageProps) => {
           </div>
           <h2 className="relative">The Referral Programe</h2>
           <p className="relative">
-            Share your referral link or get commission for referred token purchases instantly to your wallet.
+            Share your referral link and get commission for referred token purchases instantly to your wallet.
           </p>
           <div className="bg-[#191039] p-5 relative rounded">
             <CopyToClipboard canCopy={active && account != null} content={`${origin}/?ref=${account}`} />
           </div>
         </Section>
-        <Section padding className="flex flex-col md:flex-row md:justify-between">
+        <Section padding className="flex flex-col md:flex-row md:justify-between gap-5">
           <div>
             <h2>Contract Address</h2>
             <p className="break-words">0xf47D10f3f6683F71dc42DBBAf8223F49612f1d89</p>
@@ -211,7 +219,7 @@ const IndexPage = ({ location }: PageProps) => {
           <div>
             <h2>Beyond The Moon</h2>
             <ul className="list-disc list-inside pl-2">
-              <li>Pancakeswap listing 1 GCOIN = 0.6USD</li>
+              <li>Pancakeswap and Poocoin listing on 1st July, 2022 @ $0.7</li>
               <li>Presale 1 GCOIN = 0.5 BUSD</li>
             </ul>
           </div>
