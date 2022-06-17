@@ -15,8 +15,9 @@ import { buyGoldCoin, claimAirdrop } from "../utils/calls";
 import { getGoldCoinContract } from "../utils/contractHelpers";
 import cls from "classnames";
 import { StaticImage } from "gatsby-plugin-image";
+import { PageProps } from "gatsby";
 
-const IndexPage = () => {
+const IndexPage = ({ location }: PageProps) => {
   const [fetching, setFetching] = useState(false);
   const [airdropClaimed, setAirdropClaimed] = useState(false);
   const {
@@ -28,6 +29,7 @@ const IndexPage = () => {
   const { toastSuccess, toastError } = useToast();
   const [errorMsg, setErrorMsg] = useState("");
   const [amountToPay, setAmountToPay] = useState("");
+  const { origin } = location;
 
   useEffect(() => {
     (async () => {
@@ -198,10 +200,7 @@ const IndexPage = () => {
             Share your referral link or get commission for referred token purchases instantly to your wallet.
           </p>
           <div className="bg-[#191039] p-5 relative rounded">
-            <CopyToClipboard
-              canCopy={active && account != null}
-              content={`https://www.goldencoinweb.com/?ref=${account}`}
-            />
+            <CopyToClipboard canCopy={active && account != null} content={`${origin}/?ref=${account}`} />
           </div>
         </Section>
         <Section padding className="flex flex-col md:flex-row md:justify-between">
