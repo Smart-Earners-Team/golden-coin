@@ -30,7 +30,7 @@ const IndexPage = ({ location }: PageProps) => {
   const { active, account, library } = useActiveWeb3React();
   const { toastSuccess, toastError } = useToast();
   const [errorMsg, setErrorMsg] = useState("");
-  const [amountToPay, setAmountToPay] = useState("");
+  const [amountToPay, setAmountToPay] = useState("0");
   const [isApproved, setIsApproved] = useState(false);
   const { onApprove } = useApproveToken(getBusdContract(library?.getSigner()), getGoldenCoinContractAddress());
   const { origin } = location;
@@ -119,7 +119,7 @@ const IndexPage = ({ location }: PageProps) => {
         setFetching(false);
       }
     }
-  }, [library, refAddress]);
+  }, [library, refAddress, amountToPay]);
 
   const handleInputChange: React.FormEventHandler<HTMLInputElement> = useCallback(
     async (e) => {
