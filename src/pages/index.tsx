@@ -106,7 +106,8 @@ const IndexPage = ({ location }: PageProps) => {
       <main className="w-full">
         <SEO
           title="GOLDEN COIN"
-          description="Is a decentralized peer to peer  digital currency just like Bitcoin. It's a new medium of exchange for goods and services. You can use Gcoin to pay for products and services within and outside G-CONNECT ecosystem."
+          description="GCOIN is a Decentralized peer to peer digital currency just like Bitcoin it's a new medium of exchange for
+          goods and services."
           slug="/"
         />
         <Section padding className="space-y-8 relative md:text-center">
@@ -133,7 +134,7 @@ const IndexPage = ({ location }: PageProps) => {
         </Section>
         <Section
           padding
-          containerClass="px-4"
+          containerClass="px-4 my-5"
           className="bg-[#191039]/90 w-full flex flex-col md:flex-row rounded md:justify-between !max-w-4xl"
         >
           <div>
