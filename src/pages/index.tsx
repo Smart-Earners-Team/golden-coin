@@ -11,11 +11,13 @@ import CountDownTimer from "../components/Tools/CountDownTimer";
 import useActiveWeb3React from "../hooks/useActiveWeb3React";
 import { useAppContext } from "../hooks/useAppContext";
 import useToast from "../hooks/useToast";
-import { buyGoldCoin, claimAirdrop } from "../utils/calls";
-import { getGoldCoinContract } from "../utils/contractHelpers";
+import { buyGoldCoin, checkTokenAllowance, claimAirdrop } from "../utils/calls";
+import { getBusdContract, getGoldCoinContract } from "../utils/contractHelpers";
 import cls from "classnames";
 import { StaticImage } from "gatsby-plugin-image";
 import { PageProps } from "gatsby";
+import useApproveToken from "../hooks/useApproveToken";
+import { getBusdAddress, getGoldenCoinContractAddress } from "../utils/addressHelpers";
 
 const IndexPage = ({ location }: PageProps) => {
   const [fetching, setFetching] = useState(false);
@@ -29,6 +31,8 @@ const IndexPage = ({ location }: PageProps) => {
   const { toastSuccess, toastError } = useToast();
   const [errorMsg, setErrorMsg] = useState("");
   const [amountToPay, setAmountToPay] = useState("");
+  const [isApproved, setIsApproved] = useState(false);
+  const { onApprove } = useApproveToken(getBusdContract(library?.getSigner()), getGoldenCoinContractAddress());
   const { origin } = location;
 
   useEffect(() => {
@@ -47,6 +51,43 @@ const IndexPage = ({ location }: PageProps) => {
       }
     })();
   });
+
+  // Check user GCOIN allowance
+  useEffect(() => {
+    (async () => {
+      if (account != null && active && library != null) {
+        const allowance = await checkTokenAllowance(
+          account,
+          getGoldenCoinContractAddress(),
+          getBusdAddress(),
+          library.getSigner(),
+        );
+        if (allowance.isGreaterThan(0)) {
+          setIsApproved(true);
+        } else {
+          setIsApproved(false);
+        }
+      } else {
+        setIsApproved(false);
+      }
+    })();
+  }, [account, active, library]);
+
+  const handleApprove = useCallback(async () => {
+    if (account && library) {
+      setFetching(true);
+      try {
+        await onApprove();
+        setIsApproved(true);
+      } catch (e) {
+        console.error(e);
+        toastError("Error", "Please try again. Confirm the transaction and make sure you are paying enough gas!");
+        setIsApproved(false);
+      } finally {
+        setFetching(false);
+      }
+    }
+  }, [onApprove, account, library, toastError]);
 
   const handleClaimAirdrop = useCallback(async () => {
     if (library) {
@@ -181,7 +222,7 @@ const IndexPage = ({ location }: PageProps) => {
                   <p className="text-sm">Cost 0.001 BNB to get 9000 GCOIN</p>
                 </Fragment>
               )}
-              {active && airdropClaimed && (
+              {active && airdropClaimed && isApproved && (
                 <TextInput
                   errorMsg={errorMsg}
                   onChangeHandler={handleInputChange}
@@ -190,6 +231,16 @@ const IndexPage = ({ location }: PageProps) => {
                   trx={fetching}
                   isDisabled={fetching || errorMsg.length > 0 || Number.isNaN(Number.parseFloat(amountToPay))}
                 />
+              )}
+              {active && airdropClaimed && !isApproved && (
+                <Button
+                  onClick={handleApprove}
+                  className="!block mx-auto uppercase text-base"
+                  disabled={fetching}
+                  loading={fetching}
+                >
+                  Approve Contract
+                </Button>
               )}
               {!active && (
                 <Fragment>

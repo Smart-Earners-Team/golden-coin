@@ -1,7 +1,8 @@
 import BigNumber from "bignumber.js";
 import type { CallSignerType } from "../../types";
-import { getGoldCoinContract } from "../contractHelpers";
+import { getContract, getGoldCoinContract } from "../contractHelpers";
 import { BIG_TEN } from "../bigNumber";
+import erc20 from "../../config/abi/erc20.json";
 
 export const claimAirdrop = async (signer: CallSignerType) => {
   const contract = getGoldCoinContract(signer);
@@ -17,4 +18,16 @@ export const buyGoldCoin = async (amount: string, ref: string, signer: CallSigne
   const tx = await contract.buyGoldenCoin(value, ref);
   const receipt = await tx.wait();
   return receipt.status;
+};
+
+// check if a user has allowed spending a token in a specified smart contract
+export const checkTokenAllowance = async (
+  account: string,
+  contractAddress: string,
+  tokenAddress: string,
+  signer: CallSignerType,
+) => {
+  const contract = getContract(erc20, tokenAddress, signer);
+  const { _hex } = await contract.allowance(account, contractAddress);
+  return new BigNumber(_hex);
 };

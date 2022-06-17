@@ -7,3 +7,4 @@ export const getAddress = (address: Address): string => {
 };
 
 export const getGoldenCoinContractAddress = () => getAddress(addresses.goldenCoin);
+export const getBusdAddress = () => getAddress(addresses.busd);
