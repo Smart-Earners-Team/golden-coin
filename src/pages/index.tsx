@@ -124,7 +124,7 @@ const IndexPage = () => {
         <Section
           padding
           containerClass="px-4"
-          className="bg-[#191039]/90 flex flex-col md:flex-row rounded md:justify-between max-w-xl"
+          className="bg-[#191039]/90 w-full flex flex-col md:flex-row rounded md:justify-between !max-w-4xl"
         >
           <div>
             <h2 className="uppercase text-white">Tokenomics</h2>
@@ -156,9 +156,9 @@ const IndexPage = () => {
           </div>
           <h2 className="text-5xl relative">Pre-sale &amp; Airdrop</h2>
           <h3 className="text-3xl text-white relative">Join Presale and Claim free Airdrops.</h3>
-          <div className="space-y-5 relative flex flex-col items-center">
+          <div className="space-y-5 relative">
             <p className="text-[#FF61B6] font-bold">Presale Ends Feb 10th, 2022.</p>
-            <p className="max-w-lg">
+            <p className="max-w-lg mx-auto">
               100,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
             </p>
             <div className="bg-[#191039] p-5 max-w-sm space-y-3 mx-auto rounded">
@@ -168,7 +168,7 @@ const IndexPage = () => {
                   <Button onClick={handleClaimAirdrop} loading={fetching} disabled={fetching}>
                     Claim Airdrop
                   </Button>
-                  <p className="text-sm">Cost 0.01 BNB to get 9000 GCOIN</p>
+                  <p className="text-sm">Cost 0.001 BNB to get 9000 GCOIN</p>
                 </Fragment>
               )}
               {active && airdropClaimed && (
@@ -208,7 +208,7 @@ const IndexPage = () => {
         <Section padding className="flex flex-col md:flex-row md:justify-between">
           <div>
             <h2>Contract Address</h2>
-            <p className="break-words">0x9fe8228563EC4135C8c553f7419C0C1954f990C8</p>
+            <p className="break-words">0xf47D10f3f6683F71dc42DBBAf8223F49612f1d89</p>
           </div>
           <div>
             <h2>Beyond The Moon</h2>
