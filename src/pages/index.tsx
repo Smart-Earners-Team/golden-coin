@@ -130,9 +130,9 @@ const IndexPage = () => {
             <h2 className="uppercase text-white">Tokenomics</h2>
             <ol className="list-decimal list-inside pl-3 space-y-1 text-base">
               <li>Total supply = 500,000</li>
-              <li>Private Sale = 25%</li>
-              <li>Pre-sale = 20%</li>
-              <li>Liquidity = 30% (to be locked for years)</li>
+              <li>Private Sale = 5%</li>
+              <li>Pre-sale = 25%</li>
+              <li>Liquidity = 30% (to be locked for 3 years)</li>
               <li>Marketing and partnerships/advisory = 10%</li>
               <li>Charity = 10%</li>
               <li>Products development = 10%</li>
