@@ -158,9 +158,9 @@ const IndexPage = ({ location }: PageProps) => {
           <h2 className="text-5xl relative">Pre-sale &amp; Airdrop</h2>
           <h3 className="text-3xl text-white relative">Join Presale and Claim free Airdrops.</h3>
           <div className="space-y-5 relative">
-            <p className="text-[#FF61B6] font-bold">Presale Ends Feb 10th, 2022.</p>
+            <p className="text-[#FF61B6] font-bold">Presale Ends June 30th, 2022.</p>
             <p className="max-w-lg mx-auto">
-              100,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
+              125,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
             </p>
             <div className="bg-[#191039] p-5 max-w-sm space-y-3 mx-auto rounded">
               <CountDownTimer timestamp={1656629940} handleDisableButton={() => {}} />

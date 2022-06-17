@@ -13,7 +13,7 @@ export const BASE_BSC_SCAN_URL = BASE_BSC_SCAN_URLS[ChainId.MAINNET];
 
 export const addresses = {
   goldenCoin: {
-    56: "0xf4d8F31956f98664874fEc410Ae615CcdE394fbC",
+    56: "0xf47D10f3f6683F71dc42DBBAf8223F49612f1d89",
     97: "",
   },
   busd: {
