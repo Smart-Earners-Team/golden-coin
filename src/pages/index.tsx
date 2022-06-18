@@ -219,7 +219,7 @@ const IndexPage = ({ location }: PageProps) => {
                   <Button onClick={handleClaimAirdrop} loading={fetching} disabled={fetching}>
                     Claim Airdrop
                   </Button>
-                  <p className="text-sm">Cost 0.001 BNB to get 9000 GCOIN</p>
+                  <p className="text-sm">Cost 0.001 BNB to get 1 GCOIN</p>
                 </Fragment>
               )}
               {active && airdropClaimed && isApproved && (
