@@ -164,7 +164,7 @@ const IndexPage = ({ location }: PageProps) => {
             high.
           </p>
           <p className="relative">
-            GCOIN can be exchanged to bitcoin, binance coin(BNB smart chain, BUSD), Ethereum, US dollers, and and other
+            GCOIN can be exchanged to bitcoin, binance coin(BNB smart chain, BUSD), Ethereum, US dollars, and and other
             currencies all over the world.
           </p>
           <p className="relative">
