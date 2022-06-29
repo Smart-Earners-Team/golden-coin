@@ -266,7 +266,7 @@ const IndexPage = ({ location }: PageProps) => {
         <Section padding className="flex flex-col md:flex-row md:justify-between gap-5">
           <div>
             <h2>Contract Address</h2>
-            <p className="break-words">0xf47D10f3f6683F71dc42DBBAf8223F49612f1d89</p>
+            <p className="break-words">0xa5f2f61da2628D123430329D4c15720D18725f3F</p>
           </div>
           <div>
             <h2>Beyond The Moon</h2>
