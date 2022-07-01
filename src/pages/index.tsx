@@ -21,7 +21,7 @@ import { getBusdAddress, getGoldenCoinContractAddress } from "../utils/addressHe
 
 const IndexPage = ({ location }: PageProps) => {
   const [fetching, setFetching] = useState(false);
-  const [airdropClaimed, setAirdropClaimed] = useState(false);
+  // const [airdropClaimed, setAirdropClaimed] = useState(false);
   const {
     refAddress,
     triggerFetchTokens,
@@ -35,7 +35,7 @@ const IndexPage = ({ location }: PageProps) => {
   const { onApprove } = useApproveToken(getBusdContract(library?.getSigner()), getGoldenCoinContractAddress());
   const { origin } = location;
 
-  useEffect(() => {
+  /*   useEffect(() => {
     (async () => {
       if (account) {
         const contract = getGoldCoinContract();
@@ -50,7 +50,7 @@ const IndexPage = ({ location }: PageProps) => {
         setAirdropClaimed(false);
       }
     })();
-  });
+  }); */
 
   // Check user GCOIN allowance
   useEffect(() => {
@@ -89,7 +89,7 @@ const IndexPage = ({ location }: PageProps) => {
     }
   }, [onApprove, account, library, toastError]);
 
-  const handleClaimAirdrop = useCallback(async () => {
+  /*   const handleClaimAirdrop = useCallback(async () => {
     if (library) {
       setFetching(true);
       try {
@@ -103,7 +103,7 @@ const IndexPage = ({ location }: PageProps) => {
         setFetching(false);
       }
     }
-  }, [library]);
+  }, [library]); */
 
   const handleBuyGoldCoin = useCallback(async () => {
     if (library) {
@@ -205,24 +205,24 @@ const IndexPage = ({ location }: PageProps) => {
           <div className="absolute top-40 left-0 w-56 opacity-40">
             <StaticImage alt="" src="../images/bg-gcoin-logo.png" placeholder="blurred" />
           </div>
-          <h2 className="text-5xl relative">Pre-sale &amp; Airdrop</h2>
-          <h3 className="text-3xl text-white relative">Join Presale and Claim free Airdrops.</h3>
+          <h2 className="text-5xl relative">Pre-sale</h2>
+          <h3 className="text-3xl text-white relative">Join Presale Now.</h3>
           <div className="space-y-5 relative">
-            <p className="text-[#FF61B6] font-bold">Presale Ends June 30th, 2022.</p>
+            <p className="text-[#FF61B6] font-bold">Presale Ends July 14th, 2022.</p>
             <p className="max-w-lg mx-auto">
-              125,000 GCOIN available only. BUY and CLAIM 1 GCOIN airdrop, refer and earn 10% referral bonus in BUSD.
+              125,000 GCOIN available only. BUY GCOIN, refer and earn 10% referral bonus in BUSD.
             </p>
             <div className="bg-[#191039] p-5 max-w-sm space-y-3 mx-auto rounded">
-              <CountDownTimer timestamp={1656629940} handleDisableButton={() => {}} />
-              {active && !airdropClaimed && (
+              <CountDownTimer timestamp={1657753200} handleDisableButton={() => {}} />
+              {/* {active && !airdropClaimed && (
                 <Fragment>
                   <Button onClick={handleClaimAirdrop} loading={fetching} disabled={fetching}>
                     Claim Airdrop
                   </Button>
                   <p className="text-sm">Cost 0.001 BNB to get 1 GCOIN</p>
                 </Fragment>
-              )}
-              {active && airdropClaimed && isApproved && (
+              )} */}
+              {active && isApproved && (
                 <TextInput
                   errorMsg={errorMsg}
                   onChangeHandler={handleInputChange}
@@ -232,7 +232,7 @@ const IndexPage = ({ location }: PageProps) => {
                   isDisabled={fetching || errorMsg.length > 0 || Number.isNaN(Number.parseFloat(amountToPay))}
                 />
               )}
-              {active && airdropClaimed && !isApproved && (
+              {active && !isApproved && (
                 <Button
                   onClick={handleApprove}
                   className="!block mx-auto uppercase text-base"
